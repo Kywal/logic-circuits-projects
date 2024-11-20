@@ -1,0 +1,28 @@
+# Arquivos temporários e gerados automaticamente
+**/db/
+**/incremental_db/
+**/output_files/
+**/.cdb/
+**/.sim/
+**/*.rpt
+**/*.log
+**/*.sof
+**/*.pof
+**/*.jdi
+**/*.qws
+**/*.pin
+**/*.map
+**/*.fit
+**/*.done
+
+# Arquivos do ModelSim ou simuladores
+**/simulation/
+**/*.wlf
+**/transcript
+**/work/
+
+# Arquivos de backup ou temporários
+**/*.bak
+**/*.tmp
+**/*~
+
