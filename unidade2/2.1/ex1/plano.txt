@@ -1,0 +1,14 @@
+Portas:
+f -> Dado
+s[0..1] -> Seletor (0 = menos significativo, 1 = mais significativo)
+a, b, c, d -> Saídas
+
+Plano de pinagem
+s[0] = SWITCH 0 = PIN_AB28
+s[1] = SWITCH 1 = PIN_AC28
+f = SWITCH 2 = PIN_AC27
+a = LEDG0 = PIN_E21
+b = LEDG1 = PIN_E22
+c = LEDG2 = PIN_E25
+d = LEDG3 = PIN_E24
+
