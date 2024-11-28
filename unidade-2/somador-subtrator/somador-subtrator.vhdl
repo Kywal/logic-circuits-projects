@@ -12,7 +12,7 @@ PORT (
 );
 END somador_subtrator;
 
-ARCHITECTURE structural OF somador_subtrator IS
+ARCHITECTURE mixed OF somador_subtrator IS
     COMPONENT somador PORT (
         a    : IN BIT;
         b    : IN BIT;
