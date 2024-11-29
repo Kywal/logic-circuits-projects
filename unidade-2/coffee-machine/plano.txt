@@ -1,0 +1,2 @@
+Entrada com exatamente 1 bit ativo -> saída = entrada
+Qualquer outra entrada -> 00000000
