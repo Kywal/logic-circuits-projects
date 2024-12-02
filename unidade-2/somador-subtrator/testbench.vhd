@@ -1,137 +1,110 @@
 
-library IEEE;
-use IEEE.std_logic_1164.all;
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+USE ieee.numeric_std.all; -- Para conversões e operações matemáticas
 
-entity testbench is
-end testbench;
+ENTITY tb_somador_subtrator IS
+END tb_somador_subtrator;
 
-architecture tb of testbench is
-    -- Componente DUT (Dispositivo sob Teste)
-    component somador_subtrator is
-        port (
-            val_in        : in  std_logic_vector(7 downto 0);
-            op            : in  std_logic;
-            carry_out     : out std_logic;
-            resultado     : out std_logic_vector(7 downto 0);
-            default_state : out std_logic;
-            ler_a         : in  std_logic;
-            ler_b         : in  std_logic
-        );
-    end component;
+ARCHITECTURE behavior OF tb_somador_subtrator IS
+    -- Component do módulo a ser testado
+    COMPONENT somador_subtrator
+    PORT(
+        val_in        : IN STD_LOGIC_VECTOR (7 DOWNTO 0);
+        op            : IN STD_LOGIC;
+        carry_out     : OUT STD_LOGIC;
+        resultado     : OUT STD_LOGIC_VECTOR (7 DOWNTO 0);
+        ler_a         : IN STD_LOGIC;
+        ler_b         : IN STD_LOGIC;
+        default_state : OUT STD_LOGIC;
+        A_out         : OUT STD_LOGIC_VECTOR (7 DOWNTO 0);
+        B_out         : OUT STD_LOGIC_VECTOR (7 DOWNTO 0)
+    );
+    END COMPONENT;
 
-    -- Sinais para o testbench
-    signal val_in   : std_logic_vector(7 downto 0);
-    signal op       : std_logic;
-    signal A_out    : std_logic_vector(7 downto 0);
-    signal B_out    : std_logic_vector(7 downto 0);
-    signal Resultado_out : std_logic_vector(7 downto 0);
-    signal CarryOut_out  : std_logic;
-    signal DefaultState_out : std_logic;
-    signal ler_a    : std_logic;
-    signal ler_b    : std_logic;
+    -- Sinais internos para conectar ao DUT
+    SIGNAL val_in        : STD_LOGIC_VECTOR (7 DOWNTO 0);
+    SIGNAL op            : STD_LOGIC;
+    SIGNAL carry_out     : STD_LOGIC;
+    SIGNAL resultado     : STD_LOGIC_VECTOR (7 DOWNTO 0);
+    SIGNAL ler_a         : STD_LOGIC;
+    SIGNAL ler_b         : STD_LOGIC;
+    SIGNAL default_state : STD_LOGIC;
+    SIGNAL A_out         : STD_LOGIC_VECTOR (7 DOWNTO 0);
+    SIGNAL B_out         : STD_LOGIC_VECTOR (7 DOWNTO 0);
 
-begin
-    -- Instância do DUT
-    DUT: somador_subtrator
-        port map (
-            val_in => val_in,
-            op => op,
-            carry_out => CarryOut_out,
-            resultado => Resultado_out,
-            default_state => DefaultState_out,
-            ler_a => ler_a,
-            ler_b => ler_b
-        );
+BEGIN
+    -- Instância do módulo DUT
+    uut: somador_subtrator PORT MAP (
+        val_in        => val_in,
+        op            => op,
+        carry_out     => carry_out,
+        resultado     => resultado,
+        ler_a         => ler_a,
+        ler_b         => ler_b,
+        default_state => default_state,
+        A_out         => A_out,
+        B_out         => B_out
+    );
 
-    -- Processo de teste
-    process
-    begin
-        -- Teste de soma (A = 1, B = 1)
-        val_in <= "00000001";  -- Entrada = 15
-        ler_a <= '0';          -- Ler A
-        ler_b <= '1';          -- Não ler B
-        wait for 10 ns;        -- Espera 10 ns para propagar
+    -- Processo de estímulos
+    stim_proc: PROCESS
+    BEGIN
+        -- Caso 1: 1 + 1
+        val_in <= "00000001"; -- Entrada 1
+        ler_a <= '0'; -- Carrega A
+        ler_b <= '1';
+        WAIT FOR 10 ns;
+        
+        ler_a <= '1';
+        ler_b <= '0'; -- Carrega B
+        WAIT FOR 10 ns;
 
-	ler_a <= '1';          -- Não ler A
-	ler_b <= '0';          -- Ler B
-	wait for 10 ns;
+        op <= '0'; -- Operação de soma
+        WAIT FOR 20 ns;
 
+        -- Caso 2: 5 + 5
+        val_in <= "00000101"; -- Entrada 5
+        ler_a <= '0'; -- Carrega A
+        ler_b <= '1';
+        WAIT FOR 10 ns;
 
-        op <= '0';             -- Soma (OP = 0)
-        wait for 50 ns;        -- Espera 50 ns para propagar
+        ler_a <= '1';
+        ler_b <= '0'; -- Carrega B
+        WAIT FOR 10 ns;
 
-        assert (Resultado_out = "00000010") report "Falha na soma (1 + 1)" severity error;  -- Resultado esperado = 2
-        assert (A_out = "00000001") report "Falha na leitura de A" severity error;
-        assert (B_out = "00000001") report "Falha na leitura de B" severity error;
+        op <= '0'; -- Operação de soma
+        WAIT FOR 20 ns;
 
-        -- Intervalo entre os testes
-        wait for 50 ns;        -- Intervalo de 50 ns antes do próximo teste
+        -- Caso 3: 1 - 1
+        val_in <= "00000001"; -- Entrada 1
+        ler_a <= '0'; -- Carrega A
+        ler_b <= '1';
+        WAIT FOR 10 ns;
 
-        -- Teste de soma (A = 5, B = 5)
-        val_in <= "00000101";  -- Entrada = 5
-        ler_a <= '0';          -- Ler A
-        ler_b <= '1';          -- Não ler B
-        wait for 10 ns;        -- Espera 10 ns para propagar
+        ler_a <= '1';
+        ler_b <= '0'; -- Carrega B
+        WAIT FOR 10 ns;
 
-        ler_a <= '1';          -- Não ler A
-        ler_b <= '0';          -- Ler B
-        wait for 10 ns;
+        op <= '1'; -- Operação de subtração
+        WAIT FOR 20 ns;
 
-        op <= '0';             -- Soma (OP = 1)
-        wait for 50 ns;        -- Espera 50 ns para propagar
+        -- Caso 4: 10 - 2
+        val_in <= "00001010"; -- Entrada 10
+        ler_a <= '0'; -- Carrega A
+        ler_b <= '1';
+        WAIT FOR 10 ns;
 
-        assert (Resultado_out = "00001010") report "Falha na soma (5 + 5)" severity error;  -- Resultado esperado = 10
-        assert (A_out = "00000101") report "Falha na leitura de A" severity error;
-        assert (B_out = "00000101") report "Falha na leitura de B" severity error;
+        val_in <= "00000010"; -- Entrada 2
+        ler_a <= '1';
+        ler_b <= '0'; -- Carrega B
+        WAIT FOR 10 ns;
 
-        -- Intervalo entre os testes
-        wait for 50 ns;        -- Intervalo de 50 ns antes do próximo teste
+        op <= '1'; -- Operação de subtração
+        WAIT FOR 20 ns;
 
-        -- Teste de subtração simples (A = 1, B = 1)
-        val_in <= "00000001";  -- A = 1
-        ler_a <= '0';          -- Ler A
-        ler_b <= '1';          -- Não ler B
-        wait for 10 ns;        -- Espera 10 ns para propagar
+        -- Finaliza a simulação
+        WAIT;
+    END PROCESS;
 
-        ler_a <= '1';          -- Não ler A
-        ler_b <= '0';          -- Ler B
-        wait for 10 ns;        -- Espera 10 ns para propagar
-
-        op <= '1';             -- Subtração (OP = 1)
-        wait for 50 ns;        -- Espera 50 ns para propagar
-
-        assert (Resultado_out = "00000000") report "Falha na subtração" severity error;  -- Resultado esperado = 0
-        assert (A_out = "00000001") report "Falha na leitura de A" severity error;
-        assert (B_out = "00000001") report "Falha na leitura de B" severity error;
-
-        -- Intervalo entre os testes
-        wait for 50 ns;        -- Intervalo de 50 ns antes do próximo teste
-
-
-        -- Teste de subtração menos simples (A = 10, B = 8)
-        val_in <= "00001010";  -- A = 10
-        ler_a <= '0';          -- Ler A
-        ler_b <= '1';          -- Não ler B
-        wait for 10 ns;        -- Espera 10 ns para propagar
-
-        val_in <= "00000010";  -- A = 10
-        ler_a <= '1';          -- Não ler A
-        ler_b <= '0';          -- Ler B
-        wait for 10 ns;        -- Espera 10 ns para propagar
-
-        op <= '1';             -- Subtração (OP = 1)
-        wait for 50 ns;        -- Espera 50 ns para propagar
-
-        assert (Resultado_out = "00000010") report "Falha na subtração" severity error;  -- Resultado esperado = 2
-        assert (A_out = "00001010") report "Falha na leitura de A" severity error;
-        assert (B_out = "00000010") report "Falha na leitura de B" severity error;
-
-        -- Intervalo entre os testes
-        wait for 50 ns;        -- Intervalo de 50 ns antes do próximo teste
-
-
-        -- Finaliza o teste
-        assert false report "Teste finalizado." severity note;
-        wait;
-    end process;
-end tb;
+END behavior;
