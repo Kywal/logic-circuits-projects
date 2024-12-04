@@ -1,6 +1,6 @@
 # -------------------------------------------------------------------------- #
 #
-# Copyright (C) 2023  Intel Corporation. All rights reserved.
+# Copyright (C) 2024  Intel Corporation. All rights reserved.
 # Your use of Intel Corporation's design tools, logic functions 
 # and other software and tools, and any partner logic 
 # functions, and any output files from any of the foregoing 
@@ -18,8 +18,8 @@
 # -------------------------------------------------------------------------- #
 #
 # Quartus Prime
-# Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
-# Date created = 23:11:23  novembro 27, 2024
+# Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
+# Date created = 11:21:27  dezembro 03, 2024
 #
 # -------------------------------------------------------------------------- #
 #
@@ -40,17 +40,20 @@
 set_global_assignment -name FAMILY "Cyclone IV E"
 set_global_assignment -name DEVICE EP4CE115F29C7
 set_global_assignment -name TOP_LEVEL_ENTITY somador_subtrator
-set_global_assignment -name ORIGINAL_QUARTUS_VERSION 23.1STD.0
-set_global_assignment -name PROJECT_CREATION_TIME_DATE "23:11:23  NOVEMBRO 27, 2024"
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 23.1STD.1
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "11:21:27  DEZEMBRO 03, 2024"
 set_global_assignment -name LAST_QUARTUS_VERSION "23.1std.1 Lite Edition"
 set_global_assignment -name VHDL_FILE "somador-subtrator.vhdl"
 set_global_assignment -name VHDL_FILE somador.vhdl
+set_global_assignment -name VHDL_FILE testbench.vhd
+set_global_assignment -name VHDL_FILE tb_somador_subtrator.vhd
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
 set_global_assignment -name NOMINAL_CORE_SUPPLY_VOLTAGE 1.2V
 set_global_assignment -name EDA_SIMULATION_TOOL "Questa Intel FPGA (Verilog)"
+set_global_assignment -name EDA_NETLIST_WRITER_OUTPUT_DIR simulation/questa -section_id eda_simulation
 set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
 set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_timing
@@ -62,24 +65,9 @@ set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_RO
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
-set_location_assignment PIN_Y23 -to a[7]
-set_location_assignment PIN_Y24 -to a[6]
-set_location_assignment PIN_AA22 -to a[5]
-set_location_assignment PIN_AA23 -to a[4]
-set_location_assignment PIN_AA24 -to a[3]
-set_location_assignment PIN_AB23 -to a[2]
-set_location_assignment PIN_AB24 -to a[1]
-set_location_assignment PIN_AC24 -to a[0]
-set_location_assignment PIN_AB25 -to b[7]
-set_location_assignment PIN_AC25 -to b[6]
-set_location_assignment PIN_AB26 -to b[5]
-set_location_assignment PIN_AD26 -to b[4]
-set_location_assignment PIN_AC26 -to b[3]
-set_location_assignment PIN_AB27 -to b[2]
-set_location_assignment PIN_AD27 -to b[1]
-set_location_assignment PIN_AC27 -to b[0]
+set_location_assignment PIN_R24 -to ler_a
+set_location_assignment PIN_N21 -to ler_b
 set_location_assignment PIN_AB28 -to op
-set_location_assignment PIN_G19 -to cout
 set_location_assignment PIN_H15 -to resultado[7]
 set_location_assignment PIN_G16 -to resultado[6]
 set_location_assignment PIN_G15 -to resultado[5]
@@ -88,5 +76,17 @@ set_location_assignment PIN_H17 -to resultado[3]
 set_location_assignment PIN_J16 -to resultado[2]
 set_location_assignment PIN_H16 -to resultado[1]
 set_location_assignment PIN_J15 -to resultado[0]
-set_global_assignment -name VECTOR_WAVEFORM_FILE "simulacao-soma.vwf"
+set_location_assignment PIN_Y23 -to val_in[7]
+set_location_assignment PIN_Y24 -to val_in[6]
+set_location_assignment PIN_AA22 -to val_in[5]
+set_location_assignment PIN_AA23 -to val_in[4]
+set_location_assignment PIN_AA24 -to val_in[3]
+set_location_assignment PIN_AB23 -to val_in[2]
+set_location_assignment PIN_AB24 -to val_in[1]
+set_location_assignment PIN_AC24 -to val_in[0]
+set_location_assignment PIN_F19 -to carry_out
+set_location_assignment PIN_G19 -to op_led
+set_location_assignment PIN_G21 -to lendo_a
+set_location_assignment PIN_G22 -to lendo_b
+set_location_assignment PIN_M23 -to exibir_resultado
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

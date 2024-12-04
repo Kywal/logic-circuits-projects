@@ -48,8 +48,8 @@ BEGIN
         -- Teste 1: Soma de 1 + 1
         -- Configuração
         val_in <= "00000001";  -- Entrada = 1
-        ler_a_ctrl <= '0';     -- Ler A
-        ler_b_ctrl <= '0';     -- Ler B
+        ler_a_ctrl <= '1';     -- Ler A
+        ler_b_ctrl <= '1';     -- Ler B
         op <= '0';             -- Soma
 
         -- Espera por 20 ns para verificar os resultados
@@ -57,43 +57,52 @@ BEGIN
 
         -- Testa o resultado da soma
         ASSERT resultado = "00000010" REPORT "Erro no teste 1: 1 + 1" SEVERITY WARNING;
+        -- Reset entradas
+        ler_a_ctrl <= '0';     -- Reset
+        ler_b_ctrl <= '0';     -- Reset
 
         -- Teste 2: Soma de 5 + 5
         val_in <= "00000101";  -- Entrada = 5
-        ler_a_ctrl <= '0';     -- Ler A
-        ler_b_ctrl <= '0';     -- Ler B
+        ler_a_ctrl <= '1';     -- Ler A
+        ler_b_ctrl <= '1';     -- Ler B
         op <= '0';             -- Soma
 
         WAIT FOR 20 ns;
 
         ASSERT resultado = "00001010" REPORT "Erro no teste 2: 5 + 5"
         SEVERITY WARNING;
+        ler_a_ctrl <= '0';     -- Reset
+        ler_b_ctrl <= '0';     -- Reset
 
         -- Teste 3: Subtração de 1 - 1
         val_in <= "00000001";  -- Entrada = 1
-        ler_a_ctrl <= '0';     -- Ler A
-        ler_b_ctrl <= '0';     -- Ler B
+        ler_a_ctrl <= '1';     -- Ler A
+        ler_b_ctrl <= '1';     -- Ler B
         op <= '1';             -- Subtração
 
         WAIT FOR 20 ns;
 
         ASSERT resultado = "00000000" REPORT "Erro no teste 3: 1 - 1"
         SEVERITY WARNING;
+        ler_a_ctrl <= '0';     -- Reset
+        ler_b_ctrl <= '0';     -- Reset
 
         -- Teste 4: Subtração de 10 - 2
         val_in <= "00001010";  -- A = 10
-        ler_a_ctrl <= '0';     -- Ler A
-        ler_b_ctrl <= '1';     -- Não ler B
+        ler_a_ctrl <= '1';     -- Ler A
+        ler_b_ctrl <= '0';     -- Não ler B
         
         val_in <= "00000010";  -- B = 2
-        ler_a_ctrl <= '1';     -- Não ler A
-        ler_b_ctrl <= '0';     -- Ler B
+        ler_a_ctrl <= '0';     -- Não ler A
+        ler_b_ctrl <= '1';     -- Ler B
         op <= '1';             -- Subtração
 
         WAIT FOR 20 ns;
 
         ASSERT resultado = "00001000" REPORT "Erro no teste 4: 20 - 2"
         SEVERITY WARNING;
+        ler_a_ctrl <= '0';     -- Reset
+        ler_b_ctrl <= '0';     -- Reset
         
         wait;
         

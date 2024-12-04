@@ -6,15 +6,20 @@ ENTITY somador_subtrator IS
 PORT (
 
     val_in        : IN STD_LOGIC_VECTOR (7 DOWNTO 0);
-    op            : IN STD_LOGIC;                           -- (0: soma, 1: subtração)
+    op            : IN STD_LOGIC;                           -- (1: soma, 0: subtração)
     carry_out     : OUT STD_LOGIC;
     resultado     : OUT STD_LOGIC_VECTOR (7 DOWNTO 0);      -- Resultado (soma ou subtração)
+    op_led        : OUT STD_LOGIC;
 
     -- estados do programa (indicados pelo último botão pressionado)
     -- 0 é HIGH, 1 é LOW (o sentido dos valores lógicos da placa que usamos é invertido)
     ler_a              : IN STD_LOGIC;
     ler_b              : IN STD_LOGIC;
-    default_state : OUT STD_LOGIC;
+    exibir_resultado   : IN STD_LOGIC;
+
+    lendo_a : OUT STD_LOGIC;
+    lendo_b : OUT STD_LOGIC;
+    exibindo : OUT STD_LOGIC;
 
 -- Novas portas de saída para A e B
     A_out         : OUT STD_LOGIC_VECTOR(7 DOWNTO 0);      -- Saída do valor de A
@@ -32,36 +37,44 @@ ARCHITECTURE structural OF somador_subtrator IS
     );
     END COMPONENT;
 
-    SIGNAL val_a     : STD_LOGIC_VECTOR (7 DOWNTO 0) := (others => '0');
+    SIGNAL val_a     : STD_LOGIC_VECTOR (7 DOWNTO 0) := "00001000";
     SIGNAL val_b     : STD_LOGIC_VECTOR (7 DOWNTO 0) := (others => '0');
     SIGNAL carries     : STD_LOGIC_VECTOR (7 DOWNTO 0) := (others => '0');
 
 BEGIN
 
-
-    PROCESS (ler_a, ler_b, op)
-        VARIABLE led_state : STD_LOGIC := '0'; -- manipulação do led default ao longo do process menos verbosa e mais segura com uma variable
+    PROCESS (ler_a, ler_b, exibir_resultado, op)
     BEGIN
-        if ler_a = '0' then
+        if ler_a = '1' then
+            lendo_a <= '1';
+            lendo_b <= '0';
+            exibindo <= '0';
+
             val_a <= val_in;
-            led_state := '1';
-        elsif ler_b = '0' then
-            if op = '0' then
-                val_b <= val_in;
+        elsif ler_b = '1' then
+            lendo_a  <= '0';
+            lendo_b  <= '1';
+            exibindo <= '0';
 
-            elsif op = '1' then
+            if op = '1' then
+                val_b <= val_in; -- inverte o valor de B caso a operação seja subtração (op = 1). XOR exige vetores de mesmo tamanho.
+            elsif op = '0' then
                 val_b <= NOT val_in; -- inverte o valor de B caso a operação seja subtração (op = 1). XOR exige vetores de mesmo tamanho.
-
             end if;
-            led_state := '1';
+
+        elsif exibir_resultado = '1' then 
+            lendo_a  <= '0';
+            lendo_b  <= '0';
+            exibindo <= '1';
+            
         end if;
 
-        default_state <= led_state;
     END PROCESS;
   -- Atribuição das saídas A_out e B_out com os valores de A e B
 
     A_out <= val_a;  -- Saída de A
     B_out <= val_b;  -- Saída de B
+    op_led <= NOT op;
 
     -- Instâncias dos somadores
     s1 : somador PORT MAP (a => val_a(0), b => val_b(0), cin => op,  cout => carries(1), resultado => resultado(0)); -- o OP no carry carrega o +1 do complemento de 2 da subtração
