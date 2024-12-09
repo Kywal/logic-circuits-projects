@@ -87,4 +87,5 @@ set_location_assignment PIN_G22 -to lendo_b
 set_location_assignment PIN_G20 -to exibindo
 set_location_assignment PIN_M21 -to exibir_resultado
 set_location_assignment PIN_E21 -to carry_out
+set_global_assignment -name EDA_NETLIST_WRITER_OUTPUT_DIR simulation/questa -section_id eda_simulation
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
