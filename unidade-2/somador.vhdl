@@ -4,7 +4,7 @@ USE ieee.std_logic_1164.all;
 
 ENTITY somador IS
 PORT (
-    a, b, cin    : IN STD_LOGIC;
+    a, b, cin    : IN STD_LOGIC;   -- Primeiro bit de entrada
     cout, resultado: OUT STD_LOGIC
 );
 END somador;
