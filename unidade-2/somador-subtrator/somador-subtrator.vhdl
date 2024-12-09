@@ -81,7 +81,8 @@ BEGIN
 
 
     -- Instâncias dos somadores
-    s1 : somador PORT MAP (a => val_a(0), b => val_b(0), cin => op,  cout => carries(1), resultado => resultado_signal(1));
+    s1 : somador PORT MAP (a => val_a(0), b => val_b(0), cin => op,  cout => carries(1), resultado => resultado_signal(0));
+    s2 : somador PORT MAP (a => val_a(1), b => val_b(1), cin => carries(1), cout => carries(2), resultado => resultado_signal(1));
     s3 : somador PORT MAP (a => val_a(2), b => val_b(2), cin => carries(2), cout => carries(3), resultado => resultado_signal(2)); 
     s4 : somador PORT MAP (a => val_a(3), b => val_b(3), cin => carries(3), cout => carries(4), resultado => resultado_signal(3)); 
     s5 : somador PORT MAP (a => val_a(4), b => val_b(4), cin => carries(4), cout => carries(5), resultado => resultado_signal(4)); 
