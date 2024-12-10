@@ -2,24 +2,28 @@ LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 
 ENTITY coffeeMachine IS PORT (
-	s: IN STD_LOGIC_VECTOR(2 downto 0);
+	s: IN STD_LOGIC_VECTOR(0 to 7);
 	o: OUT STD_LOGIC_VECTOR(0 to 7)
 	);
 END coffeeMachine;
 
 ARCHITECTURE arq OF coffeeMachine IS
-
+	SIGNAL v: STD_LOGIC;
+	
+	COMPONENT verificador IS PORT (
+		s: IN STD_LOGIC_VECTOR(0 to 7);
+		o: OUT STD_LOGIC
+	);
+	END COMPONENT;
+		
 BEGIN
-	WITH s SELECT
-		o <= 
-			"10000000" WHEN "000",
-			"01000000" WHEN "001",
-			"00100000" WHEN "010",
-			"00010000" WHEN "011",
-			"00001000" WHEN "100",
-			"00000100" WHEN "101",
-			"00000010" WHEN "110",
-			"00000001" WHEN "111";
-			
-			
+	ver: verificador PORT MAP (s, v);
+	o(0) <= v AND s(0);
+	o(1) <= v AND s(1);
+	o(2) <= v AND s(2);
+	o(3) <= v AND s(3);
+	o(4) <= v AND s(4);
+	o(5) <= v AND s(5);
+	o(6) <= v AND s(6);
+	o(7) <= v AND s(7);
 END arq;

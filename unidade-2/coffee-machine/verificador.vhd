@@ -1,0 +1,24 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+
+ENTITY verificador IS PORT (
+	s: IN STD_LOGIC_VECTOR(0 to 7);
+	o: OUT STD_LOGIC
+	);
+END verificador;
+
+ARCHITECTURE arq OF verificador IS
+	
+BEGIN
+	WITH s SELECT
+		o <= '1' WHEN 
+			"10000000" | 
+			"01000000" |
+			"00100000" |
+			"00010000" |
+			"00001000" |
+			"00000100" |
+			"00000010" |
+			"00000001",
+			'0' WHEN OTHERS;
+END arq;
