@@ -14,16 +14,21 @@
 # https://fpgasoftware.intel.com/eula.
 
 # Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
-# File: /home/ianguis/repositories/logic-circuits-projects/unidade-2/demux/when-else/demux1x4.csv
-# Generated on: Tue Dec 10 09:42:44 2024
+# File: /home/ianguis/repositories/logic-circuits-projects/unidade-2/demux/case/demux1x4.csv
+# Generated on: Thu Dec 12 17:57:12 2024
 
 # Note: The column header names should not be changed if you wish to import this .csv file into the Quartus Prime software.
 
 To,Direction,Location,I/O Bank,VREF Group,I/O Standard,Reserved,Current Strength,Slew Rate,Differential Pair,Strict Preservation
-f,Input,PIN_AC27,5,B5_N2,,,,,,
+a[1],Output,PIN_H19,7,B7_N2,,,,,,
+a[0],Output,PIN_J19,7,B7_N2,,,,,,
+b[1],Output,PIN_E18,7,B7_N1,,,,,,
+b[0],Output,PIN_F18,7,B7_N1,,,,,,
+c[1],Output,PIN_F21,7,B7_N0,,,,,,
+c[0],Output,PIN_E19,7,B7_N0,,,,,,
+d[1],Output,PIN_F19,7,B7_N0,,,,,,
+d[0],Output,PIN_G19,7,B7_N2,,,,,,
+f[1],Input,PIN_AD27,5,B5_N2,,,,,,
+f[0],Input,PIN_AC27,5,B5_N2,,,,,,
 s[1],Input,PIN_AC28,5,B5_N2,,,,,,
 s[0],Input,PIN_AB28,5,B5_N1,,,,,,
-x[3],Output,PIN_F21,7,B7_N0,,,,,,
-x[2],Output,PIN_E19,7,B7_N0,,,,,,
-x[1],Output,PIN_F19,7,B7_N0,,,,,,
-x[0],Output,PIN_G19,7,B7_N2,,,,,,

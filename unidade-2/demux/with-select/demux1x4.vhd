@@ -2,8 +2,8 @@ LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 
 ENTITY demux1x4 IS PORT (
-	f: IN STD_LOGIC;
-	x : OUT STD_LOGIC_VECTOR(3 downto 0);
+	f: IN STD_LOGIC_VECTOR(1 downto 0);
+	a, b, c, d : OUT STD_LOGIC_VECTOR(1 downto 0);
 	s: IN STD_LOGIC_VECTOR(1 downto 0)
 	);
 END demux1x4;
@@ -12,15 +12,15 @@ ARCHITECTURE demux OF demux1x4 IS
 
 BEGIN
 	WITH s SELECT
-		x(0) <= f WHEN "00", '0' WHEN OTHERS;
+		a <= f WHEN "00", "00" WHEN OTHERS;
 		
 	WITH s SELECT
-		x(1) <= f WHEN "01", '0' WHEN OTHERS;
+		b <= f WHEN "01", "00" WHEN OTHERS;
 
 	WITH s SELECT
-		x(2) <= f WHEN "10", '0' WHEN OTHERS;
+		c <= f WHEN "10", "00" WHEN OTHERS;
 		
 	WITH s SELECT
-		x(3) <= f WHEN "11", '0' WHEN OTHERS;
+		d <= f WHEN "11", "00" WHEN OTHERS;
 END demux;
 	
