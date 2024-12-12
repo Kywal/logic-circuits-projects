@@ -4,9 +4,9 @@ USE ieee.numeric_std.all;
 
 ENTITY aritmetico IS
 PORT (
-    a, b      : IN  std_logic_vector (7 DOWNTO 0);
+    a, b      : IN  std_logic_vector (15 DOWNTO 0);
     sel       : IN  std_logic_vector (3 DOWNTO 0);
-    i1, i2    : OUT std_logic_vector (7 DOWNTO 0);
+    i1, i2    : OUT std_logic_vector (15 DOWNTO 0);
     c0        : OUT std_logic
 );
 END aritmetico;

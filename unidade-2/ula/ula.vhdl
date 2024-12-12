@@ -3,11 +3,11 @@ USE ieee.std_logic_1164.all;
 
 ENTITY ula IS
 PORT (
-    val_in      : IN  std_logic_vector (7 DOWNTO 0);  -- Valor de entrada para A ou B
+    val_in      : IN  std_logic_vector (15 DOWNTO 0);  -- Valor de entrada para A ou B
     sel         : IN  std_logic_vector (2 DOWNTO 0);  -- Seletor de operação
     ler_a       : IN  std_logic;                     -- Controle de leitura para A
     ler_b       : IN  std_logic;                     -- Controle de leitura para B
-    resultado   : OUT std_logic_vector (7 DOWNTO 0); -- Resultado da operação
+    resultado   : OUT std_logic_vector (15 DOWNTO 0); -- Resultado da operação
     cout        : OUT std_logic                      -- Carry-out
 );
 END ula;
