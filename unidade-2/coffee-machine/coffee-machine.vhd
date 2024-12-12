@@ -18,12 +18,12 @@ ARCHITECTURE arq OF coffeeMachine IS
 		
 BEGIN
 	ver: verificador PORT MAP (s, v);
-	o(0) <= v AND s(0);
-	o(1) <= v AND s(1);
-	o(2) <= v AND s(2);
-	o(3) <= v AND s(3);
-	o(4) <= v AND s(4);
-	o(5) <= v AND s(5);
-	o(6) <= v AND s(6);
-	o(7) <= v AND s(7);
+	o(0) <= NOT v OR s(0);
+	o(1) <= NOT v OR s(1);
+	o(2) <= NOT v OR s(2);
+	o(3) <= NOT v OR s(3);
+	o(4) <= NOT v OR s(4);
+	o(5) <= NOT v OR s(5);
+	o(6) <= NOT v OR s(6);
+	o(7) <= NOT v OR s(7);
 END arq;

@@ -12,6 +12,7 @@ ARCHITECTURE arq OF verificador IS
 BEGIN
 	WITH s SELECT
 		o <= '1' WHEN 
+			"00000000" |
 			"10000000" | 
 			"01000000" |
 			"00100000" |
