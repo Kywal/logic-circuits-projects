@@ -3,10 +3,9 @@ USE ieee.std_logic_1164.all;
 
 ENTITY logico IS
 PORT (
-    a, b      : IN  std_logic_vector (15 DOWNTO 0);
-    sel       : IN  std_logic_vector (3 DOWNTO 0);
-    i1, i2    : OUT std_logic_vector (15 DOWNTO 0);
-    c0        : OUT std_logic
+    a, b      : IN  STD_LOGIC_VECTOR (15 DOWNTO 0);
+    sel       : IN  STD_LOGIC_VECTOR (1 DOWNTO 0);
+    resultado_logico : OUT STD_LOGIC_VECTOR (15 DOWNTO 0)
 );
 END logico;
 
@@ -16,26 +15,16 @@ BEGIN
     PROCESS (a, b, sel)
     BEGIN
         CASE sel IS
-        WHEN "100" =>  -- AND
-            i1 <= a AND b;
-            i2 <= "00000000";
-            c0 <= '0';
-        WHEN "101" =>  -- OR
-            i1 <= a OR b;
-            i2 <= "00000000";
-            c0 <= '0';
-        WHEN "110" =>  -- XOR
-            i1 <= a XOR b;
-            i2 <= "00000000";
-            c0 <= '0';
-        WHEN "111" =>  -- XNOR
-            i1 <= a XNOR b;
-            i2 <= "00000000";
-            c0 <= '0';
+        WHEN "00" =>  -- AND
+            resultado_logico <= a AND b;
+        WHEN "01" =>  -- OR
+            resultado_logico <= a OR b;
+        WHEN "10" =>  -- XOR
+            resultado_logico <= a XOR b;
+        WHEN "11" =>  -- XNOR
+            resultado_logico <= a XNOR b;
         WHEN OTHERS =>
-            i1 <= "00000000";
-            i2 <= "00000000";
-            c0 <= '0';
+            resultado_logico <= (others => '0');
         END CASE;
     END PROCESS;
 END comportamental;

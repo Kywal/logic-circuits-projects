@@ -1,10 +1,10 @@
-Analysis & Synthesis Status : Successful - Fri Dec 13 11:47:21 2024
-Quartus Prime Version : 23.1std.0 Build 991 11/28/2023 SC Lite Edition
+Analysis & Synthesis Status : Successful - Sun Dec 15 16:31:38 2024
+Quartus Prime Version : 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 Revision Name : ula
 Top-level Entity Name : leitor
 Family : Cyclone IV E
-Total logic elements : 98
-    Total combinational functions : 59
+Total logic elements : 99
+    Total combinational functions : 60
     Dedicated logic registers : 43
 Total registers : 43
 Total pins : 56

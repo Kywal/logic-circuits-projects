@@ -3,9 +3,9 @@ USE IEEE.STD_LOGIC_1164.ALL;
 
 ENTITY leitor IS
     PORT (
-		  clk: IN STD_LOGIC;
+	clk: IN STD_LOGIC;
         entrada: IN STD_LOGIC_VECTOR(15 downto 0);
-		  botao_ler_a, botao_ler_b, botao_ler_seletor, botao_exibir_resultado: IN STD_LOGIC;
+	botao_ler_a, botao_ler_b, botao_ler_seletor, botao_exibir_resultado: IN STD_LOGIC;
 
         display0, display1, display2, display3: OUT STD_LOGIC_VECTOR(0 to 6);
         display_estado: OUT STD_LOGIC_VECTOR(0 to 6)
@@ -18,7 +18,7 @@ ARCHITECTURE arqLeitor OF leitor IS
 	 SIGNAL estado_atual: estado_t := IDLE;
 	
 	 -- sinais para armazenar os valores de a, b e seletor
-    SIGNAL val_a, val_b: STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
+	 SIGNAL val_a, val_b: STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
 	 SIGNAL val_seletor: STD_LOGIC_VECTOR(2 downto 0) := (others => '0');
 	 
 	 SIGNAL numero_para_exibir, seletor_display, resultado: STD_LOGIC_VECTOR(15 downto 0) := (others => '0');
@@ -61,22 +61,25 @@ BEGIN
     END PROCESS;
 
 	
-    WITH estado_atual SELECT
-		display_estado <= "1111111" WHEN IDLE,
+    WITH estado_atual SELECT 
+		display_estado <= "1111111" WHEN IDLE,					-- exibe o estado no display
 								"0001000" WHEN A,
 								"1100000" WHEN B,
 								"0110001" WHEN C,
 								"1000010" WHEN D;
 	 
 	 seletor_display(2 downto 0) <= val_seletor;
-	 
-	 resultado <= val_a;
-	 WITH estado_atual SELECT
-		numero_para_exibir <= (others => '0') WHEN IDLE,
-									 val_a WHEN A,
-									 val_b WHEN B,
-									 seletor_display WHEN C,
-									 resultado WHEN D;
+
+
+    WITH estado_atual SELECT
+		numero_para_exibir <= (others => '0') WHEN IDLE,			-- escolhe o objeto atual a ser mostrado (A, B, operação, resultado) com base no estado
+								val_a WHEN A,
+								val_b WHEN B,
+								seletor_display WHEN C,
+								resultado WHEN D;
+
+
 		
-	 hexa1: hexaconverter PORT MAP (numero_para_exibir, display0, display1, display2, display3);
+    hexa1: hexaconverter PORT MAP (numero_para_exibir, display0, display1, display2, display3);
+
 END arqLeitor;
