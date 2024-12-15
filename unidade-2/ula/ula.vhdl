@@ -18,7 +18,8 @@ ARCHITECTURE structural OF ula IS
     PORT (
         a, b : IN  STD_LOGIC_VECTOR (15 DOWNTO 0);
         sel : IN  STD_LOGIC_VECTOR (1 DOWNTO 0);
-        resultado_arit : OUT STD_LOGIC_VECTOR (15 DOWNTO 0)
+        resultado_arit : OUT STD_LOGIC_VECTOR (15 DOWNTO 0);
+        cout : OUT STD_LOGIC
     );
     END COMPONENT;
 
@@ -35,12 +36,17 @@ ARCHITECTURE structural OF ula IS
 
 BEGIN
 
-    WITH val_seletor(2) SELECT
-        resultado <= resultado_arit WHEN '0',
-                     resultado_logico WHEN '1';
+    PROCESS (val_seletor, resultado_arit, resultado_logico)
+    BEGIN
+        CASE val_seletor(2) IS
+            WHEN '0' => resultado <= resultado_arit;
+            WHEN '1' => resultado <= resultado_logico;
+            WHEN OTHERS => resultado <= (OTHERS => '0'); -- Comportamento padrão
+        END CASE;
+    END PROCESS;
 
     -- Instância do componente lógico
-    logico_inst: entity work.logico
+    logico_inst: logico
      port map(
         a => val_a,
         b => val_b,
@@ -48,13 +54,13 @@ BEGIN
         resultado_logico => resultado_logico
     );
 
-    -- Instância do componente aritmético
-    aritmetico_inst : aritmetico
-    PORT MAP (
-        a      => val_a,
-        b      => val_b,
-        sel    => val_seletor(1 DOWNTO 0),
-        resultado_arit => resultado_arit
+    aritmetico_inst: aritmetico
+     port map(
+        a => val_a,
+        b => val_b,
+        sel => val_seletor(1 DOWNTO 0),
+        resultado_arit => resultado_arit,
+        cout => cout
     );
 
 END structural;

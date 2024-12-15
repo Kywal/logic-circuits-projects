@@ -15,16 +15,11 @@ BEGIN
     PROCESS (a, b, sel)
     BEGIN
         CASE sel IS
-        WHEN "00" =>  -- AND
-            resultado_logico <= a AND b;
-        WHEN "01" =>  -- OR
-            resultado_logico <= a OR b;
-        WHEN "10" =>  -- XOR
-            resultado_logico <= a XOR b;
-        WHEN "11" =>  -- XNOR
-            resultado_logico <= a XNOR b;
-        WHEN OTHERS =>
-            resultado_logico <= (others => '0');
+        WHEN "00" => resultado_logico <= a AND b;
+        WHEN "01" => resultado_logico <= a OR b;
+        WHEN "10" => resultado_logico <= a XOR b;
+        WHEN "11" => resultado_logico <= a XNOR b;
+        WHEN OTHERS => resultado_logico <= (others => '0');
         END CASE;
     END PROCESS;
 END comportamental;
