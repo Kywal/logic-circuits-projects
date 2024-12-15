@@ -70,6 +70,7 @@ BEGIN
 	 
 	 seletor_display(2 downto 0) <= val_seletor;
 	 
+	 resultado <= val_a;
 	 WITH estado_atual SELECT
 		numero_para_exibir <= (others => '0') WHEN IDLE,
 									 val_a WHEN A,
