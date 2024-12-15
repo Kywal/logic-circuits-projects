@@ -25,9 +25,8 @@ ARCHITECTURE structural OF ula IS
     COMPONENT logico
     PORT (
         a, b      : IN  STD_LOGIC_VECTOR (15 DOWNTO 0);
-        val_seletor       : IN  STD_LOGIC_VECTOR (2 DOWNTO 0);
-        i1, i2    : OUT STD_LOGIC_VECTOR (7 DOWNTO 0);
-        c0        : OUT STD_LOGIC
+        sel       : IN  STD_LOGIC_VECTOR (1 DOWNTO 0);
+        resultado_logico : OUT STD_LOGIC_VECTOR (15 DOWNTO 0)
     );
     END COMPONENT;
 
