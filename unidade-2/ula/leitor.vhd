@@ -8,7 +8,9 @@ ENTITY leitor IS
 	botao_ler_a, botao_ler_b, botao_ler_seletor, botao_exibir_resultado: IN STD_LOGIC;
 
         display0, display1, display2, display3: OUT STD_LOGIC_VECTOR(0 to 6);
-        display_estado: OUT STD_LOGIC_VECTOR(0 to 6)
+        display_estado: OUT STD_LOGIC_VECTOR(0 to 6);
+
+	cout : OUT STD_LOGIC
     );
 END leitor;
 
@@ -32,6 +34,14 @@ ARCHITECTURE arqLeitor OF leitor IS
 		display1: OUT STD_LOGIC_VECTOR(0 to 6);
 		display2: OUT STD_LOGIC_VECTOR(0 to 6);
 		display3: OUT STD_LOGIC_VECTOR(0 to 6)
+	);
+	END COMPONENT;
+
+	COMPONENT ula PORT (
+	    val_a, val_b : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+    	    val_seletor : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
+    	    resultado   : OUT STD_LOGIC_VECTOR (15 DOWNTO 0); -- Resultado da operação
+    	    cout        : OUT STD_LOGIC                      -- Carry-out
 	);
 	END COMPONENT;
 BEGIN
@@ -60,6 +70,8 @@ BEGIN
         END IF;
     END PROCESS;
 
+
+
 	
     WITH estado_atual SELECT 
 		display_estado <= "1111111" WHEN IDLE,					-- exibe o estado no display
@@ -81,5 +93,14 @@ BEGIN
 
 		
     hexa1: hexaconverter PORT MAP (numero_para_exibir, display0, display1, display2, display3);
+
+    ula_inst: entity work.ula
+     port map(
+        val_a => val_a,
+        val_b => val_b,
+        val_seletor => val_seletor,
+        resultado => resultado,
+        cout => cout
+    );
 
 END arqLeitor;
