@@ -3,14 +3,15 @@ USE IEEE.STD_LOGIC_1164.ALL;
 
 ENTITY leitor IS
     PORT (
-	clk: IN STD_LOGIC;
-        entrada: IN STD_LOGIC_VECTOR(15 downto 0);
-	botao_ler_a, botao_ler_b, botao_ler_seletor, botao_exibir_resultado: IN STD_LOGIC;
+			clk: IN STD_LOGIC;
+			
+			entrada: IN STD_LOGIC_VECTOR(15 downto 0);
+			botao_ler_a, botao_ler_b, botao_ler_seletor, botao_exibir_resultado: IN STD_LOGIC;
+		
+			display0, display1, display2, display3: OUT STD_LOGIC_VECTOR(0 to 6);
+			display_estado: OUT STD_LOGIC_VECTOR(0 to 6);
 
-        display0, display1, display2, display3: OUT STD_LOGIC_VECTOR(0 to 6);
-        display_estado: OUT STD_LOGIC_VECTOR(0 to 6);
-
-	cout : OUT STD_LOGIC
+			cout : OUT STD_LOGIC
     );
 END leitor;
 
@@ -38,7 +39,7 @@ ARCHITECTURE arqLeitor OF leitor IS
 	END COMPONENT;
 
 	COMPONENT ula PORT (
-	    val_a, val_b : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+			 val_a, val_b : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
     	    val_seletor : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
     	    resultado   : OUT STD_LOGIC_VECTOR (15 DOWNTO 0); -- Resultado da operação
     	    cout        : OUT STD_LOGIC                      -- Carry-out
