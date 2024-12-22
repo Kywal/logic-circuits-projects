@@ -11,7 +11,8 @@ PORT (
     ler_b_ctrl  : IN  STD_LOGIC;                     -- Controle para leitura de B
     resultado   : OUT STD_LOGIC_VECTOR (7 DOWNTO 0); -- Resultado da operação
     luz_soma    : OUT STD_LOGIC;                     -- Acende se for soma
-    luz_subt    : OUT STD_LOGIC                      -- Acende se for subtração
+    luz_subt    : OUT STD_LOGIC;                     -- Acende se for subtração
+	 carry_out   : OUT STD_LOGIC
 );
 END calculadora;
 
@@ -27,7 +28,6 @@ ARCHITECTURE structural OF calculadora IS
     END COMPONENT;
 
 	 SIGNAL val_a, val_b: STD_LOGIC_VECTOR(7 downto 0) := (others => '0');
-	 SIGNAL discard: STD_LOGIC;
 		
 	 
 BEGIN
@@ -45,7 +45,7 @@ BEGIN
 	END PROCESS;
 	
 	
-    s1: somador_subtrator PORT MAP (val_a, val_b, op, discard, resultado);
+    s1: somador_subtrator PORT MAP (val_a, val_b, op, carry_out, resultado);
     -- Controle das luzes
     luz_soma <= NOT op; -- Luz para soma
     luz_subt <= op;     -- Luz para subtração
