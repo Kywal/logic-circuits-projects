@@ -1,0 +1,45 @@
+# Copyright (C) 2023  Intel Corporation. All rights reserved.
+# Your use of Intel Corporation's design tools, logic functions 
+# and other software and tools, and any partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Intel Program License 
+# Subscription Agreement, the Intel Quartus Prime License Agreement,
+# the Intel FPGA IP License Agreement, or other applicable license
+# agreement, including, without limitation, that your use is for
+# the sole purpose of programming logic devices manufactured by
+# Intel and sold by Intel or its authorized distributors.  Please
+# refer to the applicable agreement for further details, at
+# https://fpgasoftware.intel.com/eula.
+
+# Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
+# File: /home/ianguis/repositories/logic-circuits-projects/unidade-2/calculadora/calculadora.csv
+# Generated on: Thu Jan 16 11:53:31 2025
+
+# Note: The column header names should not be changed if you wish to import this .csv file into the Quartus Prime software.
+
+To,Direction,Location,I/O Bank,VREF Group,Fitter Location,I/O Standard,Reserved,Current Strength,Slew Rate,Differential Pair,Strict Preservation
+carry_out,Output,PIN_F21,7,B7_N0,PIN_AD3,,,,,,
+luz_soma,Output,PIN_G19,7,B7_N2,PIN_V8,,,,,,
+luz_subt,Output,PIN_F19,7,B7_N0,PIN_AE1,,,,,,
+resultado[7],Output,PIN_H15,7,B7_N2,PIN_AC3,,,,,,
+resultado[6],Output,PIN_G16,7,B7_N2,PIN_U7,,,,,,
+resultado[5],Output,PIN_G15,7,B7_N2,PIN_T8,,,,,,
+resultado[4],Output,PIN_F15,7,B7_N2,PIN_AA3,,,,,,
+resultado[3],Output,PIN_H17,7,B7_N2,PIN_AE2,,,,,,
+resultado[2],Output,PIN_J16,7,B7_N2,PIN_AA4,,,,,,
+resultado[1],Output,PIN_H16,7,B7_N2,PIN_AD2,,,,,,
+resultado[0],Output,PIN_J15,7,B7_N2,PIN_U8,,,,,,
+clk,Input,PIN_Y2,2,B2_N0,PIN_J1,,,,,,
+ler_a_ctrl,Input,PIN_M23,6,B6_N2,PIN_AB3,,,,,,
+ler_b_ctrl,Input,PIN_M21,6,B6_N1,PIN_AD1,,,,,,
+op,Input,PIN_Y23,5,B5_N2,PIN_V5,,,,,,
+val_in[7],Input,PIN_AB26,5,B5_N1,PIN_AC2,,,,,,
+val_in[6],Input,PIN_AD26,5,B5_N2,PIN_AC1,,,,,,
+val_in[5],Input,PIN_AC26,5,B5_N2,PIN_U6,,,,,,
+val_in[4],Input,PIN_AB27,5,B5_N1,PIN_Y3,,,,,,
+val_in[3],Input,PIN_AD27,5,B5_N2,PIN_W2,,,,,,
+val_in[2],Input,PIN_AC27,5,B5_N2,PIN_W1,,,,,,
+val_in[1],Input,PIN_AC28,5,B5_N2,PIN_U5,,,,,,
+val_in[0],Input,PIN_AB28,5,B5_N1,PIN_Y4,,,,,,

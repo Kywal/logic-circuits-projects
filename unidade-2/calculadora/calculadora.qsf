@@ -62,3 +62,26 @@ set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_location_assignment PIN_F21 -to carry_out
+set_location_assignment PIN_G19 -to luz_soma
+set_location_assignment PIN_F19 -to luz_subt
+set_location_assignment PIN_H15 -to resultado[7]
+set_location_assignment PIN_G16 -to resultado[6]
+set_location_assignment PIN_G15 -to resultado[5]
+set_location_assignment PIN_F15 -to resultado[4]
+set_location_assignment PIN_H17 -to resultado[3]
+set_location_assignment PIN_J16 -to resultado[2]
+set_location_assignment PIN_H16 -to resultado[1]
+set_location_assignment PIN_J15 -to resultado[0]
+set_location_assignment PIN_Y2 -to clk
+set_location_assignment PIN_M23 -to ler_a_ctrl
+set_location_assignment PIN_M21 -to ler_b_ctrl
+set_location_assignment PIN_Y23 -to op
+set_location_assignment PIN_AB26 -to val_in[7]
+set_location_assignment PIN_AD26 -to val_in[6]
+set_location_assignment PIN_AC26 -to val_in[5]
+set_location_assignment PIN_AB27 -to val_in[4]
+set_location_assignment PIN_AD27 -to val_in[3]
+set_location_assignment PIN_AC27 -to val_in[2]
+set_location_assignment PIN_AC28 -to val_in[1]
+set_location_assignment PIN_AB28 -to val_in[0]
