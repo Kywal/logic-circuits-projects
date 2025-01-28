@@ -55,7 +55,7 @@ BEGIN
 						state <= reading;
 					END IF;					
 				
-				WHEN reading => 
+				WHEN reading =>
 				
 					outputBank <= registers(selected_reg); 
 					
@@ -63,7 +63,7 @@ BEGIN
 						state <= pickingReg;
 					ELSIF startWriting = '1' AND pickReg = '0' THEN
 						state <= writing;
-					END IF;					
+					END IF;
 			
 			END CASE;
 		END IF;
