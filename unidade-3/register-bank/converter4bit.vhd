@@ -1,11 +1,9 @@
 LIBRARY IEEE;
-LIBRARY KAILIB;
-USE KAILIB.REGBANK_STATES.ALL;
 USE IEEE.STD_LOGIC_1164.ALL;
 
 ENTITY converter4bit IS 
 	PORT (
-		state: IN RegBank_states;
+		state: IN STD_LOGIC_VECTOR(1 downto 0);
 		number: IN STD_LOGIC_VECTOR(3 downto 0);
 		leds: OUT STD_LOGIC_VECTOR(0 to 6)
 	);
@@ -19,8 +17,7 @@ BEGIN
 	
 		CASE state IS
 		
-			WHEN IDLE =>
-			
+			WHEN "00" =>
 				leds <= "1111110";
 				
 			WHEN OTHERS =>

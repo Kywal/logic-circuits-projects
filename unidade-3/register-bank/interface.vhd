@@ -1,6 +1,4 @@
 LIBRARY IEEE;
-LIBRARY KAILIB;
-USE KAILIB.REGBANK_STATES.ALL;
 USE IEEE.STD_LOGIC_1164.ALL;
 
 ENTITY interface IS
@@ -12,7 +10,7 @@ ENTITY interface IS
 		display1: OUT STD_LOGIC_VECTOR(0 to 6);
 		display2: OUT STD_LOGIC_VECTOR(0 to 6);
 		display3: OUT STD_LOGIC_VECTOR(0 to 6);
-		display4: OUT STD_LOGIC_VECTOR(0 to 6);
+		display_estado: OUT STD_LOGIC_VECTOR(0 to 6);
 	
 		clock, pickReg, startReading, startWriting: IN STD_LOGIC;
 		input: IN STD_LOGIC_VECTOR(word_size-1 downto 0)
@@ -26,27 +24,27 @@ PORT(
 		clock, pickReg, startReading, startWriting: IN STD_LOGIC;
 		inputBank: IN STD_LOGIC_VECTOR(word_size-1 downto 0);
 		outputReg: OUT STD_LOGIC_VECTOR(2 downto 0);
-		outputState: OUT RegBank_states;
+		outputState: OUT STD_LOGIC_VECTOR(1 downto 0);
 		outputBank: OUT STD_LOGIC_VECTOR(word_size-1 downto 0)	
 );
 END COMPONENT;
 
 COMPONENT hexaconverter 
 PORT(
-	state: IN RegBank_states;
+	state: IN STD_LOGIC_VECTOR(1 downto 0);
 	reg: IN STD_LOGIC_VECTOR(2 downto 0);
 	number: IN STD_LOGIC_VECTOR(15 downto 0);
 	display0: OUT STD_LOGIC_VECTOR(0 to 6);
 	display1: OUT STD_LOGIC_VECTOR(0 to 6);
 	display2: OUT STD_LOGIC_VECTOR(0 to 6);
 	display3: OUT STD_LOGIC_VECTOR(0 to 6);
-	display4: OUT STD_LOGIC_VECTOR(0 to 6)
+	display_estado: OUT STD_LOGIC_VECTOR(0 to 6)
 );
 END COMPONENT;
 
 SIGNAL result: STD_LOGIC_VECTOR(word_size-1 downto 0) := (OTHERS => '0');
 SIGNAL interface_reg: STD_LOGIC_VECTOR(2 downto 0) := (OTHERS => '0');
-SIGNAL interface_state: RegBank_states;
+SIGNAL interface_state: STD_LOGIC_VECTOR(1 downto 0);
 
 BEGIN
 	
@@ -72,7 +70,7 @@ BEGIN
 		display1 => display1,
 		display2 => display2,
 		display3 => display3,
-		display4 => display4
+		display_estado => display_estado
 	);
 	
 END;
