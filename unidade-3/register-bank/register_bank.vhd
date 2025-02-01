@@ -43,11 +43,15 @@ BEGIN
 					outputState <= "00";  -- IDLE
 					
 					IF pickReg = '0' THEN
+<<<<<<< Updated upstream
 						state <= "01";
 					ELSIF startReading = '0' THEN
 						state <= "11";
 					ELSIF startWriting = '0'THEN
 						state <= "10";
+=======
+						state <= pickingReg;
+>>>>>>> Stashed changes
 					END IF;
 				
 				
